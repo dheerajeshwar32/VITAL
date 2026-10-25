@@ -300,16 +300,22 @@ function AcidModal({ isOpen, onClose }) {
 
 function SqlModal({ isOpen, onClose }) {
   if (!isOpen) return null;
-  const [sql, setSql] = useState("SELECT * FROM ORGAN WHERE status = 'AVAILABLE';");
+  const [sql, setSql] = useState("SELECT organ_id, organ_code, side, harvest_time, status FROM ORGAN WHERE status = 'AVAILABLE';");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [execTime, setExecTime] = useState(null);
 
+  useEffect(() => {
+    handleExecute("SELECT organ_id, organ_code, side, harvest_time, status FROM ORGAN WHERE status = 'AVAILABLE';");
+  }, []);
+
   const presets = [
     { label: "Available Organs", query: "SELECT organ_id, organ_code, side, harvest_time, status FROM ORGAN WHERE status = 'AVAILABLE';" },
-    { label: "Critical Waitlist", query: "SELECT recipient_id, full_name, blood_group, urgency_level, registration_date FROM RECIPIENT WHERE urgency_level = 1;" },
-    { label: "Pending Allocations", query: "SELECT allocation_id, organ_id, recipient_id, match_score, status, offer_time FROM ALLOCATION WHERE status = 'PENDING';" },
-    { label: "Audit Log Trail", query: "SELECT log_id, action_type, organ_id, old_status, new_status, performed_by, timestamp FROM AUDIT_LOG ORDER BY timestamp DESC LIMIT 10;" },
+    { label: "Waitlist Patients", query: "SELECT recipient_id, full_name, blood_group, urgency_level, registration_date, status FROM RECIPIENT WHERE status = 'WAITING';" },
+    { label: "Allocations", query: "SELECT allocation_id, organ_id, recipient_id, match_score, status, offer_time, decision_reason FROM ALLOCATION;" },
+    { label: "Audit Log Trail", query: "SELECT log_id, action_type, performed_by, timestamp, details FROM AUDIT_LOG ORDER BY timestamp DESC LIMIT 10;" },
+    { label: "Hospitals", query: "SELECT hospital_id, name, city, is_center FROM HOSPITAL;" },
+    { label: "Donors", query: "SELECT donor_id, full_name, blood_group, donor_type, consent_status FROM DONOR;" },
   ];
 
   const handleExecute = async (queryToRun) => {
