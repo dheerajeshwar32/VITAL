@@ -180,12 +180,12 @@ function MillionDollarLogo() {
             VITAL
           </span>
           <span className="text-[9px] font-mono font-bold tracking-[0.2em] px-2 py-0.5 rounded-full bg-cyan-950/90 text-cyan-300 border border-cyan-500/40 uppercase shadow-sm">
-            PRO
+            DBMS
           </span>
         </div>
         <div className="flex items-center gap-1.5 mt-0.5">
           <span className="text-[9px] font-mono tracking-[0.25em] text-slate-400 uppercase font-semibold">
-            TRANSPLANT ALLOCATION OS
+            NATIONAL ALLOCATION NETWORK
           </span>
           <span className="w-1 h-1 rounded-full bg-slate-600" />
           <span className="text-[9px] font-mono text-emerald-400 font-bold tracking-wider">
